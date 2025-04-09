@@ -17,7 +17,7 @@ import model.Employee;
  *
  * @author henar
  */
-public class DBManagement {
+public class DBManagemer {
     
     
     private static String dataConection = "jdbc:mysql://localhost:3306/";
@@ -26,7 +26,7 @@ public class DBManagement {
     private static String password = "1234";
     public static Connection con;
     
-    public DBManagement() {
+    public DBManagemer() {
         try {
             con = DriverManager.getConnection(dataConection, user, password);
             try {
@@ -40,6 +40,38 @@ public class DBManagement {
         }
     }
     
+    public static void loadEmployeesData() throws SQLException {
+        String query = "select * from serie";
+        Statement stmt = null;
+        ResultSet rs = null;
+        Employee employee;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                employee = new Employee(
+                    rs.getInt("id"),
+                    rs.getString("nombre"),
+                    rs.getInt("age"),
+                    rs.getString("department"),
+                    rs.getDouble("salary")
+                );
+                
+                EmployeeManager.addEmployeeToList(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+    }
+        
     private void createDB() throws SQLException {
         String query = "create database if not exists " + dataBase + ";";
         Statement stmt = null;
@@ -78,7 +110,7 @@ public class DBManagement {
     }
     
     public int insertEmployee(Employee employee) throws SQLException {
-        String query = "insert into Employee(name, age, department, salary) "
+        String query = "insert into Employees(name, age, department, salary) "
                 + "values('" + employee.getName() + "', " + employee.getAge() + ", '" + employee.getDepartment() + "', " + employee.getSalary() + ")";
         Statement stmt = null;
         ResultSet rs = null;
@@ -101,8 +133,9 @@ public class DBManagement {
     }
     
     public void updateEmployee(Employee employee) throws SQLException {
-        String query = "insert into Employee(name, age, department, salary) "
-                + "values('" + employee.getName() + "', " + employee.getAge() + ", '" + employee.getDepartment() + "', " + employee.getSalary() + ")";
+        String query = "update Employees "
+                + "set name = '" + employee.getName() + "', age = " + employee.getAge() + ", department = '" + employee.getDepartment() + "', salary = " + employee.getSalary() + " "
+                + "where id = " + employee.getId();
         Statement stmt = null;
         
         try {
@@ -113,33 +146,21 @@ public class DBManagement {
         } finally {
             stmt.close();
         }
-        
     }
     
-    public static void loadEmployeesData() throws SQLException {
-        String query = "select * from serie";
+    public void deleteEmployee(Employee employee) throws SQLException {
+        String query = "delete from Employees "
+                + "where id = " + employee.getId();
         Statement stmt = null;
-        ResultSet rs = null;
-        Employee employee;
-
+        
         try {
             stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                employee = new Employee(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getInt("age"),
-                    rs.getString("department"),
-                    rs.getDouble("salary")
-                );
-                EmployeeManager.employees.put(employee.getId(), employee);
-            }
+            stmt.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            rs.close();
             stmt.close();
         }
     }
+  
 }
