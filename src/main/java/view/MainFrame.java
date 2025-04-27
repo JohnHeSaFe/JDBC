@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.Color;
+
 /**
  *
  * @author henar
@@ -15,6 +17,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        backgroundLabel.setBackground(new Color(255, 255, 255, 200));
     }
 
     /**
@@ -26,17 +29,120 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        enterEmployeeButton = new javax.swing.JButton();
+        updateEmployeeButton = new javax.swing.JButton();
+        deleteEmployeeButton = new javax.swing.JButton();
+        listEmployeesButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
+        backgroundLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Inventario Libros");
+
+        jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/img/background.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 550));
+        jLabel4.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Employee Manager");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 480, 60));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
+
+        enterEmployeeButton.setText("Enter employee");
+        enterEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterEmployeeButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(enterEmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 160, 50));
+
+        updateEmployeeButton.setText("Update employee");
+        updateEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmployeeButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(updateEmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 160, 50));
+
+        deleteEmployeeButton.setText("Delete employee");
+        deleteEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteEmployeeButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(deleteEmployeeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 160, 50));
+
+        listEmployeesButton.setText("List employees");
+        listEmployeesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listEmployeesButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(listEmployeesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 160, 50));
+
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 160, 50));
+
+        backgroundLabel.setBackground(new java.awt.Color(255, 255, 255));
+        backgroundLabel.setOpaque(true);
+        getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 480, 480));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\henar\\OneDrive - Stucom, S.A\\Documentos\\NetBeansProjects\\mavenproject1\\src\\main\\resources\\img\\background.jpg")); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 560));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void enterEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterEmployeeButtonActionPerformed
+        // TODO add your handling code here:
+        EnterEmployeeDialog jdialog = new EnterEmployeeDialog(this, true);
+        jdialog.setLocationRelativeTo(this);
+        jdialog.setVisible(true);
+    }//GEN-LAST:event_enterEmployeeButtonActionPerformed
+
+    private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeButtonActionPerformed
+        // TODO add your handling code here:
+        UpdateEmployeeDialog jdialog = new UpdateEmployeeDialog(this, true);
+        jdialog.setLocationRelativeTo(this);
+        jdialog.setVisible(true);
+    }//GEN-LAST:event_updateEmployeeButtonActionPerformed
+
+    private void deleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeButtonActionPerformed
+        // TODO add your handling code here:
+        DeleteEmployeeDialog jdialog = new DeleteEmployeeDialog(this, true);
+        jdialog.setLocationRelativeTo(this);
+        jdialog.setVisible(true);
+    }//GEN-LAST:event_deleteEmployeeButtonActionPerformed
+
+    private void listEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listEmployeesButtonActionPerformed
+        // TODO add your handling code here:
+        ListEmployeesDialog jdialog = new ListEmployeesDialog(this, true);
+        jdialog.setLocationRelativeTo(this);
+        jdialog.setVisible(true);
+    }//GEN-LAST:event_listEmployeesButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,6 +180,16 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backgroundLabel;
+    private javax.swing.JButton deleteEmployeeButton;
+    private javax.swing.JButton enterEmployeeButton;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JButton listEmployeesButton;
+    private javax.swing.JButton updateEmployeeButton;
     // End of variables declaration//GEN-END:variables
 }

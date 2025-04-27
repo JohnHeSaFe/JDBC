@@ -6,27 +6,24 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
 import model.Employee;
 
 /**
  *
  * @author henar
  */
-public class DBManagemer {
-    
-    
+public class DBManager {
     private static String dataConection = "jdbc:mysql://localhost:3306/";
     private static String dataBase = "employeeJavaDAM";
     private static String user = "root";
     private static String password = "1234";
     public static Connection con;
     
-    public DBManagemer() {
+    public DBManager() {
         try {
             con = DriverManager.getConnection(dataConection, user, password);
             try {
@@ -40,8 +37,8 @@ public class DBManagemer {
         }
     }
     
-    public static void loadEmployeesData() throws SQLException {
-        String query = "select * from serie";
+    public void loadEmployeesData() throws SQLException {
+        String query = "select * from employees";
         Statement stmt = null;
         ResultSet rs = null;
         Employee employee;
@@ -52,7 +49,7 @@ public class DBManagemer {
             while (rs.next()) {
                 employee = new Employee(
                     rs.getInt("id"),
-                    rs.getString("nombre"),
+                    rs.getString("name"),
                     rs.getInt("age"),
                     rs.getString("department"),
                     rs.getDouble("salary")
@@ -110,15 +107,20 @@ public class DBManagemer {
     }
     
     public int insertEmployee(Employee employee) throws SQLException {
-        String query = "insert into Employees(name, age, department, salary) "
-                + "values('" + employee.getName() + "', " + employee.getAge() + ", '" + employee.getDepartment() + "', " + employee.getSalary() + ")";
+        String query = "INSERT INTO Employees (name, age, department, salary) VALUES ('"
+                + employee.getName() + "', "
+                + employee.getAge() + ", '"
+                + employee.getDepartment() + "', "
+                + employee.getSalary() + ")";
+
         Statement stmt = null;
         ResultSet rs = null;
         int id = -1;
-        
+
         try {
             stmt = con.createStatement();
-            stmt.executeUpdate(query);
+            stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
             rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 id = rs.getInt(1);
@@ -126,12 +128,13 @@ public class DBManagemer {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            stmt.close();
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
         }
-        
+
         return id;
     }
-    
+
     public void updateEmployee(Employee employee) throws SQLException {
         String query = "update Employees "
                 + "set name = '" + employee.getName() + "', age = " + employee.getAge() + ", department = '" + employee.getDepartment() + "', salary = " + employee.getSalary() + " "
@@ -162,5 +165,4 @@ public class DBManagemer {
             stmt.close();
         }
     }
-  
 }

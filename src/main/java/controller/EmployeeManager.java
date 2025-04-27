@@ -16,12 +16,12 @@ import model.Employee;
 public class EmployeeManager {
     private static final HashMap<Integer, Employee> employees = new HashMap<>();
     
-    private static final DBManagemer db = new DBManagemer();
+    private static final DBManager db = new DBManager();
     
     public static Employee searchEmployee(int id) throws SQLException {
-        Iterator it = employees.keySet().iterator();
+        Iterator<Integer> it = employees.keySet().iterator();
         while (it.hasNext()) {
-            String key = (String) it.next();
+            Integer key = it.next();
             if (employees.get(key).getId() == id) {
                 return employees.get(key);
             }
